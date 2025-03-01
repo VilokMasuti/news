@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewsCard renders without crashing 1`] = `
+<div>
+  <div
+    class="group h-full flex flex-col card-hover animate-scale-in"
+    style="animation-delay: 0s;"
+  >
+    <a
+      class="flex flex-col h-full overflow-hidden rounded-lg border bg-card text-card-foreground transition-all hover:shadow-md"
+      href="/article/test-article?url=%23"
+    >
+      <div
+        class="relative aspect-[16/9] overflow-hidden"
+      >
+        <div
+          class="absolute inset-0 bg-muted animate-pulse block"
+        />
+        <img
+          alt="Test Article"
+          class="object-cover transition-transform duration-500 group-hover:scale-105 opacity-0"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          src="https://example.com/test.jpg"
+        />
+        <div
+          class="absolute top-3 left-3"
+        >
+          <span
+            class="px-3 py-1 text-xs font-medium rounded-full bg-secondary text-secondary-foreground transition-colors"
+          >
+            Test Source
+          </span>
+        </div>
+      </div>
+      <div
+        class="flex flex-col flex-grow p-4"
+      >
+        <h3
+          class="font-semibold text-lg tracking-tight mb-2 line-clamp-2 group-hover:text-primary transition-colors"
+        >
+          Test Article
+        </h3>
+        <p
+          class="text-muted-foreground text-sm line-clamp-3 mb-4"
+        >
+          Test description
+        </p>
+        <div
+          class="mt-auto pt-4 flex items-center justify-between text-xs text-muted-foreground border-t"
+        >
+          <time
+            datetime="2024-01-01"
+          >
+            January 1, 2024 at 05:30 AM
+          </time>
+          <span>
+            Test Author
+          </span>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+`;
