@@ -13,10 +13,17 @@ const validCategories: NewsCategory[] = [
   'technology',
 ];
 
-
+export function generateStaticParams() {
+  return validCategories.map((category) => ({
+    slug: category,
+  }));
+}
 export default async function CategoryPage({
   params,
-}: { params: Promise<{ slug: string }> }) { // FIXED TYPE
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  // FIXED TYPE
   const { slug } = await params; // Now we await params properly
 
   if (!validCategories.includes(slug as NewsCategory)) {
