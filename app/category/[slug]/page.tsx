@@ -13,21 +13,18 @@ const validCategories: NewsCategory[] = [
   'technology',
 ];
 
-interface Props {
-  params: {
-    slug: string;
-  };
-  searchParams: { [key: string]: string | string[] | undefined };
-}
-
 export function generateStaticParams() {
   return validCategories.map((category) => ({
     slug: category,
   }));
 }
 
-export default async function CategoryPage({ params }: Props) {
-  const { slug } = params;
+export default async function CategoryPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const slug = params.slug;
 
   if (!validCategories.includes(slug as NewsCategory)) {
     notFound();
