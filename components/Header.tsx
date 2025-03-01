@@ -51,7 +51,7 @@ export default function Header() {
   };
 
   const handleCategoryClick = (category: NewsCategory) => {
-    router.push(`/Category/${category}`);
+    router.push(`/category/${category}`);
     setIsMenuOpen(false);
   };
 
@@ -89,9 +89,9 @@ export default function Header() {
             {categories.slice(0, 4).map((category) => (
               <Link
                 key={category}
-                href={`/Category/${category}`}
+                href={`/category/${category}`}
                 className={`nav-link capitalize ${
-                  pathname === `/Category/${category}`
+                  pathname === `/category/${category}`
                     ? 'bg-secondary text-foreground'
                     : 'text-muted-foreground hover:text-foreground hover:bg-secondary'
                 }`}
@@ -208,9 +208,9 @@ export default function Header() {
             {categories.map((category) => (
               <Link
                 key={category}
-                href={`/Category/${category}`}
+                href={`/category/${category}`}
                 className={`nav-link capitalize ${
-                  pathname === `/Category/${category}`
+                  pathname === `/category/${category}`
                     ? 'bg-secondary text-foreground'
                     : ''
                 }`}

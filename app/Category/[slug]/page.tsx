@@ -13,17 +13,19 @@ const validCategories: NewsCategory[] = [
   'technology',
 ];
 
+interface CategoryPageProps {
+  params: {
+    slug: string;
+  };
+}
+
 export function generateStaticParams() {
   return validCategories.map((category) => ({
     slug: category,
   }));
 }
 
-export default async function CategoryPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default async function CategoryPage({ params }: CategoryPageProps) {
   const { slug } = params;
 
   if (!validCategories.includes(slug as NewsCategory)) {
