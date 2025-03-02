@@ -50,7 +50,7 @@ export async function searchNews(
       sortBy,
     });
     const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/search?${params.toString()}`
+      `${process.env.NEXT_PUBLIC_BASE_URL }/api/search?${params.toString()}`
     );
     if (response.status !== 200) {
       throw new Error('Failed to fetch top headlines');

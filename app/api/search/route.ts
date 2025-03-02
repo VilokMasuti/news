@@ -1,42 +1,70 @@
+'use server';
+import type { NewsCategory, NewsResponse } from '@/types';
 import axios from 'axios';
-import { NextResponse } from 'next/server';
 
-const EVERYTHING_URL = 'https://newsapi.org/v2/everything';
+const BASE_URL =
+  process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'; // Fallback for dev mode
 
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-
-  const q = searchParams.get('q');
-  const page = searchParams.get('page') || '1';
-  const pageSize = searchParams.get('pageSize') || '10';
-  const sortBy = searchParams.get('sortBy') || 'publishedAt';
-
-  if (!q) {
-    return NextResponse.json(
-      { error: 'Search query is required' },
-      { status: 400 }
-    );
-  }
-    // Log API Key and Request URL
-    console.log("Using API Key:", process.env.NEWS_API_KEY);
-    console.log(`Fetching: ${EVERYTHING_URL}?q=${q}&page=${page}&pageSize=${pageSize}&sortBy=${sortBy}`);
-
+export async function getTopHeadlines(
+  country = 'us',
+  category?: NewsCategory,
+  page = 1,
+  pageSize = 10,
+  query?: string
+): Promise<NewsResponse> {
   try {
-    const response = await axios.get(EVERYTHING_URL, {
-      params: {
-        q,
-        page,
-        pageSize,
-        sortBy,
-        apiKey: process.env.NEWS_API_KEY,
-      },
+    const params = new URLSearchParams({
+      country,
+      page: page.toString(),
+      pageSize: pageSize.toString(),
     });
-    return NextResponse.json(response.data);
+    if (category) params.append('category', category);
+    if (query) params.append('q', query);
+
+    const response = await axios.get(`${BASE_URL}/api/news?${params.toString()}`);
+
+    if (response.status !== 200) {
+      throw new Error('Failed to fetch top headlines');
+    }
+
+    return response.data;
   } catch (error) {
-    console.error('Error searching news:', error);
-    return NextResponse.json(
-      { error: 'Failed to search news' },
-      { status: 500 }
-    );
+    console.error('Error in getTopHeadlines:', error);
+    return {
+      status: 'error',
+      totalResults: 0,
+      articles: [],
+    };
+  }
+}
+
+export async function searchNews(
+  query: string,
+  page = 1,
+  pageSize = 10,
+  sortBy = 'publishedAt'
+): Promise<NewsResponse> {
+  try {
+    const params = new URLSearchParams({
+      q: query,
+      page: page.toString(),
+      pageSize: pageSize.toString(),
+      sortBy,
+    });
+
+    const response = await axios.get(`${BASE_URL}/api/search?${params.toString()}`);
+
+    if (response.status !== 200) {
+      throw new Error('Failed to fetch search results');
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error('Error in searchNews:', error);
+    return {
+      status: 'error',
+      totalResults: 0,
+      articles: [],
+    };
   }
 }

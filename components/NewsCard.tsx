@@ -25,7 +25,7 @@ export default function NewsCard({ article, index }: NewsCardProps) {
 
   // Calculate animation delay based on index (for staggered entry)
   const getAnimationDelay = () => {
-    return `${index * 0.05}s`;
+    return `${index * 0.09}s`;
   };
 
   return (
@@ -65,7 +65,7 @@ export default function NewsCard({ article, index }: NewsCardProps) {
           )}
           {article.source.name && (
             <div className="absolute top-3 left-3">
-              <span className="px-3 py-1 text-xs font-medium rounded-full bg-secondary text-secondary-foreground transition-colors">
+              <span className="px-3 py-1 text-xs font-medium rounded-full bg-secondary text-secondary-foreground transition-colors bg-amber-200">
                 {article.source.name}
               </span>
             </div>

@@ -57,7 +57,7 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-700  bg-amber-400 ${
         isScrolled
           ? 'bg-background/80 backdrop-blur-lg shadow-sm'
           : 'bg-transparent'
@@ -68,10 +68,12 @@ export default function Header() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center font-bold text-xl tracking-tight transition-transform hover:scale-[1.02]"
+            className="flex  items-center font-bold text-xl tracking-tight transition-transform hover:scale-[1.02]"
           >
             <span className="text-primary">News</span>
-            <span className="text-muted-foreground">Pulse</span>
+            <span className="text-muted-foreground animate-pulse duration-1000 ">
+              Pulse
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
